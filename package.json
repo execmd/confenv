@@ -1,0 +1,32 @@
+{
+  "name": "confenv",
+  "description": "NodeJS library for reading config file line by line to JS object",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/execmd/node-confenv.git"
+  },
+  "main": "lib/Confenv.js",
+  "files": [
+    "lib"
+  ],
+  "author": "Deniss Perepelicins <me@rigaden.me>",
+  "version": "1.0.0",
+  "keywords": [
+    "config",
+    "env",
+    "dotnotation",
+    "dot",
+    "notation"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.1.0"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "engines": {
+    "node": "> 0.12"
+  },
+  "license": "MIT"
+}
