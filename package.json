@@ -1,5 +1,6 @@
 {
   "name": "node-confenv",
+  "version": "1.0.1",
   "description": "NodeJS library for reading config file line by line to JS object",
   "repository": {
     "type": "git",
@@ -10,7 +11,6 @@
     "lib"
   ],
   "author": "Deniss Perepelicins <me@rigaden.me>",
-  "version": "1.0.0",
   "keywords": [
     "config",
     "env",
