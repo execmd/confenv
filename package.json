@@ -26,7 +26,5 @@
     "test": "./node_modules/.bin/mocha -u tdd --reporter spec"
   },
   "engines": {
-    "node": "> 0.12"
-  },
-  "license": "MIT"
+    "node": "> 4444"license": "MIT"
 }
