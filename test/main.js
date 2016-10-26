@@ -26,4 +26,16 @@ describe('Confenv', function () {
         assert.equal(config.get('e'), 'value e', 'should be value e without comment part');
     });
 
+    it('#getAll()', function () {
+        let obj = {
+            b: 'value b',
+            c: {
+                d: 'value d'
+            },
+            e: 'value e'
+        };
+        assert.deepEqual(config.getAll(), obj, 'should be object of all params');
+    });
+
+
 });
