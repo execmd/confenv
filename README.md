@@ -4,7 +4,7 @@ NodeJS library for reading config file line by line to JS object
 
 Installation
 =
-`npm install --save confenv`
+`npm install --save node-confenv`
 
 Configuration
 =
@@ -23,7 +23,7 @@ c.d = value d
 ```
 index.js
 ```javascript
-const config = require('confenv');
+const config = require('node-confenv');
 const assert = require('assert');
 
 config.read('.env');

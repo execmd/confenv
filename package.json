@@ -1,5 +1,5 @@
 {
-  "name": "confenv",
+  "name": "node-confenv",
   "description": "NodeJS library for reading config file line by line to JS object",
   "repository": {
     "type": "git",
