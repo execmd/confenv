@@ -6,6 +6,11 @@ Installation
 =
 `npm install --save confenv`
 
+Configuration
+=
+To change folder in whick module will seek for config file use env variable
+`CONFIG_PATH=/etc/myapp node index.js`
+
 Usage
 =
 
