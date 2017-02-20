@@ -107,18 +107,31 @@ class Confenv {
      *
      * return array
      */
-    getArray(key, separator = ',') {
+    getArray(key, separator) {
+        // Support for v4 version
+        if (typeof separator === 'undefined') {
+            separator = ',';
+        }
+
         let string = this.get(key);
         let arr;
         if (typeof string === 'string') {
             arr = string.split(separator);
         } else if (typeof string === 'object') {
-            arr = Object.values(string);
+            if (Object.values) {
+                arr = Object.values(string);
+            } else {
+                // Support for v6 version
+                arr = Object.keys(string).map(function (v) {
+                    return string[v];
+                });
+            }
+
         } else {
             arr = [];
         }
 
-        return arr.map((v) => {
+        return arr.map(function (v) {
             return (v && (typeof v === 'string') && v.trim()) || v;
         });
     }
