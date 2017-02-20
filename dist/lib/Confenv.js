@@ -1,11 +1,11 @@
 'use strict';
 
-const util    = require('util');
-const fs      = require('fs');
-const path    = require('path');
+const util = require('util');
+const fs = require('fs');
+const path = require('path');
 
 class Confenv {
-    constructor () {
+    constructor() {
         // Holds the config object
         this._configPath = process.env['CONFIG_PATH'] || process.cwd();
         this._config = {};
@@ -21,7 +21,7 @@ class Confenv {
      *
      * return void
      */
-    reload () {
+    reload() {
         //this._log.info('Reloading configs: %j', this._paths);
         this._paths.forEach((filepath) => this._read(filepath));
     }
@@ -53,9 +53,16 @@ class Confenv {
      * return config
      */
     getAll() {
-      return new Object(this._config);
+        return new Object(this._config);
     }
 
+    /*
+     * Returns string from config.
+     * If key points to group, returns group
+     * If key not found, returns undefined
+     *
+     * return string|object|undefined
+     */
     get(key) {
         let value = spread(this._config, key);
         if (typeof value === 'string') {
@@ -63,8 +70,57 @@ class Confenv {
         } else if (typeof value === 'undefined') {
             return value;
         } else {
-            return new Object(value);
+            return Object.assign({}, value);
         }
+    }
+
+    /*
+     * Returns parseInt(string) from config
+     *
+     * return number
+     */
+    getInt(key) {
+        return parseInt(this.get(key));
+    }
+
+    /*
+     * Returns parseFloat(string) from config
+     *
+     * return number
+     */
+    getFloat(key) {
+        return parseFloat(this.get(key));
+    }
+
+    /*
+     * Returns boolean presentation of string
+     *
+     * return boolean
+     */
+    getBool(key) {
+        return !!(this.get(key));
+    }
+
+    /*
+     * Returns array of strings
+     * Splits string by separator. Default separator is coma
+     *
+     * return array
+     */
+    getArray(key, separator = ',') {
+        let string = this.get(key);
+        let arr;
+        if (typeof string === 'string') {
+            arr = string.split(separator);
+        } else if (typeof string === 'object') {
+            arr = Object.values(string);
+        } else {
+            arr = [];
+        }
+
+        return arr.map((v) => {
+            return (v && (typeof v === 'string') && v.trim()) || v;
+        });
     }
 
     _findConfig(file) {
@@ -87,7 +143,7 @@ class Confenv {
     _read(filepath) {
         let file;
         try {
-            file = fs.readFileSync(filepath, { encoding: 'utf-8' });
+            file = fs.readFileSync(filepath, {encoding: 'utf-8'});
             file = file.split('\n');
         } catch (e) {
             //this._log.error('Error read config `%s`: ', filepath, e);
@@ -116,7 +172,7 @@ class Confenv {
     }
 }
 
-function spread (obj, is, value) {
+function spread(obj, is, value) {
     if (typeof is == 'string') {
         return spread(obj, is.split('.'), value);
     } else if (is.length == 1 && value !== undefined) {
