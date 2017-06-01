@@ -98,7 +98,13 @@ class Confenv {
      * return boolean
      */
     getBool(key) {
-        return !!(this.get(key));
+        let val = this.get(key);
+        if (typeof val === 'string') {
+            val = val.toLowerCase();
+            return (val === 'true' || !!parseInt(val) || val === 't');
+        }
+
+        return !!val;
     }
 
     /*

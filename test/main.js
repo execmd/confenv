@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 const config = require('../dist/lib/Confenv.js');
-
+config.read('test/.env');
 
 describe('Confenv', function () {
     it('#read()', function () {
@@ -37,6 +37,16 @@ describe('Confenv', function () {
             int: '123',
             float: '123.456',
             bool: 'true',
+            bool2: 'True',
+            bool3: 'TRUE',
+            bool4: 'T',
+            bool5: 'False',
+            bool6: 'F',
+            bool7: '1',
+            bool8: '0',
+            bool9: 'TrueFalseTrue',
+            bool10: '1.99',
+            bool11: '2',
             array: '1,2,3',
             array2: '1|2|3',
             array3: '1 OR 2 OR 3'
@@ -73,8 +83,26 @@ describe('Confenv', function () {
     });
 
     describe('getBool', function () {
-        it('#getBool() returns number', function () {
-            assert(config.getBool('bool'), 'should be boolean True');
+        describe('#getBool() on string & numeric', function () {
+            describe('#getBool() returns true', function () {
+
+                [, 2, 3, 4, 7, 10, 11].map((inx) => '' + inx || '').forEach((inx) => {
+                    it('Truthy on ' + config.get('bool' + inx), function () {
+                        assert(config.getBool('bool' + inx), 'should be boolean Truthy');
+                    });
+                });
+
+            });
+
+            describe('#getBool() returns false', function () {
+
+                [5, 6, 8, 9].forEach((inx) => {
+                    it('Falsy on ' + config.get('bool' + inx), function () {
+                        assert(!config.getBool('bool' + inx), 'should be boolean Falsy');
+                    });
+                });
+
+            });
         });
 
         it('#getBool() on undefined', function () {
