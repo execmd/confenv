@@ -70,3 +70,8 @@ And test our file
 ```bash
 node index.js
 ```
+TODO
+====
+
+- [ ] spread with environment vars
+- [ ] auto convert types

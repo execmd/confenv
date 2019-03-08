@@ -1,6 +1,6 @@
 {
   "name": "node-confenv",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NodeJS library for reading config file line by line to JS object",
   "repository": {
     "type": "git",
@@ -8,15 +8,17 @@
   },
   "main": "dist/lib/Confenv.js",
   "files": [
-    "dist/lib/Confenv.js"
+    "dist/lib/Confenv.js",
+    "./node-confenv.d.ts"
   ],
-  "author": "Deniss Perepelicins <me@rigaden.me>",
+  "author": "Deniss Robatens <me@rigaden.me>",
   "keywords": [
     "config",
     "env",
     "dotnotation",
     "dot",
-    "notation"
+    "notation",
+	"environment"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -28,5 +30,6 @@
   "engines": {
     "node": ">4"
   },
+  "types": "./node-confenv.d.ts",
   "license": "MIT"
 }
